@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Three Button Game</title>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+    <h1 id="top-message">Three Button Game</h1>
+    <div>
+      <button id="button1">click me</button>
+      <button id="button2">click me</button>
+      <button id="button3">click me</button>
+    </div>
+    <h2 id="winner">Click those buttons!</h2>
+  </body>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script type="text/javascript">
+    $(document).on('ready', function() {
+      var button1Clicked = false;
+      var button2Clicked = false;
+      var button3Clicked = false;
+      
+      document.getElementById('button1').addEventListener('click', function() {
+        button1Clicked = true;
+        document.getElementById('button1').textContent = 'clicked';
+        determineWin();
+      });
+      
+      document.getElementById('button2').addEventListener('click', function() {
+        button2Clicked = true;
+        document.getElementById('button2').textContent = 'clicked';
+        determineWin();
+      });
+      
+      document.getElementById('button3').addEventListener('click', function() {
+        button3Clicked = true;
+        document.getElementById('button3').textContent = 'clicked';
+        determineWin();
+      });
+      
+      function determineWin() {
+        if (button1Clicked && button2Clicked && button3Clicked) {
+          document.getElementById('winner').textContent = "You win!";
+        }
+      }
+    })
+
+  </script>
+</html>
