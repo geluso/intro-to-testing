@@ -231,3 +231,63 @@ of the steps we'll take for our first test:
 Add another test to the suite by adding another `it()` function. This test should
 test Celsius to Fahrenheit conversion. Write a test to make sure `100` degress
 Celsius is equal to `212` degrees Fahrenheit.
+
+# More Selenium Features
+**Selenium** offers many ways for programmers to interact with the browser.
+Download this cheatsheet and see a brief summary of what all it has to offer.
+
+[Download Selenium Cheatsheet](assets/selenium-cheatsheet.pdf)
+
+Here's a full list of everything you can do when you get a reference to an HTML
+element on a webpage. Read about the details of each method on the official
+[Selenium WebElement API Documentation](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_WebElement.html).
+
+```js
+var el = driver.findElement(By.id('foo'));
+el.clear()
+el.click()
+el.findElement( locator )
+el.findElements( locator )
+el.getAttribute( attributeName )
+el.getCssValue( cssStyleProperty )
+el.getDriver()
+el.getId()
+el.getLocation()
+el.getSize()
+el.getTagName()
+el.getText()
+el.isDisplayed()
+el.isEnabled()
+el.isSelected()
+el.sendKeys( ...var_args )
+el.submit()
+el.takeScreenshot( opt_scroll )
+```
+
+# Exercise: Test Hot/Cold Red/Blue Result Background Color
+Use the methods above to write a new test that makes sure the temperature website
+changes the background color of the result area to be Red/Blue or gray according
+to how hot or cold the temperature is.
+
+# Solution: Test Hot/Cold Red/Blue Result Background Color
+One solution is to use the `el.getAttribute()` method to read the `class`
+attribute of the `result` element. This method returns a `.then()` promise
+that passes a parameter with the value of the attribute you ask for.
+
+Review this code to see how the test tests to make sure the proper class name
+is set on the element after performing a temperature conversion:
+
+```js
+it("should show red for hot temperatures", function(done) {
+  // clear input, put in your own input, click the submit button.
+  driver.findElement(By.id('clear')).click();
+  driver.findElement(By.id('degrees-number')).sendKeys('213');
+  driver.findElement(By.id('F')).click();
+  driver.findElement(By.id('submit')).click();
+
+  // get the result and see if it's what we expect
+  driver.findElement(By.id('result')).getAttribute('class').then(function(className) {
+    assert.equal(className, "hot");
+  }).finally(done);
+});
+```
