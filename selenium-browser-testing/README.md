@@ -291,3 +291,9 @@ it("should show red for hot temperatures", function(done) {
   }).finally(done);
 });
 ```
+
+# Lab: Three Button Win
+Now that you've learned the basics of testing websites with **Selenium** and
+**Mocha** try to write tests for this simple Three Button website game. After
+you successfully write tests for the Three Button website move on to writing
+tests for a Tic Tac Toe game.
