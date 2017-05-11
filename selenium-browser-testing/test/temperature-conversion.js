@@ -50,4 +50,43 @@ describe("Temperature Conversion Site", function() {
       assert.equal(txt, expected);
     }).finally(done);
   });
+  
+  it("should show blue for cold temperatures", function(done) {
+    // clear input, put in your own input, click the submit button.
+    driver.findElement(By.id('clear')).click();
+    driver.findElement(By.id('degrees-number')).sendKeys('31');
+    driver.findElement(By.id('F')).click();
+    driver.findElement(By.id('submit')).click();
+
+    // get the result and see if it's what we expect
+    driver.findElement(By.id('result')).getAttribute('class').then(function(className) {
+      assert.equal(className, "cold");
+    }).finally(done);
+  });
+  
+  it("should show gray for medium temperatures", function(done) {
+    // clear input, put in your own input, click the submit button.
+    driver.findElement(By.id('clear')).click();
+    driver.findElement(By.id('degrees-number')).sendKeys('80');
+    driver.findElement(By.id('F')).click();
+    driver.findElement(By.id('submit')).click();
+
+    // get the result and see if it's what we expect
+    driver.findElement(By.id('result')).getAttribute('class').then(function(className) {
+      assert.equal(className, "normal");
+    }).finally(done);
+  });
+  
+  it("should show red for hot temperatures", function(done) {
+    // clear input, put in your own input, click the submit button.
+    driver.findElement(By.id('clear')).click();
+    driver.findElement(By.id('degrees-number')).sendKeys('213');
+    driver.findElement(By.id('F')).click();
+    driver.findElement(By.id('submit')).click();
+
+    // get the result and see if it's what we expect
+    driver.findElement(By.id('result')).getAttribute('class').then(function(className) {
+      assert.equal(className, "hot");
+    }).finally(done);
+  });
 });
