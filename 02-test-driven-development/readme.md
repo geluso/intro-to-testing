@@ -132,8 +132,9 @@ correctly.
   a string like `"January 1st, 1988"` or `"June 11th, 1992"` with correct
   "1st", "2nd", "3rd" and "th" suffixes.
 * Each `YearDate` object should have a method called `.daysBetween(other)` that
-  accepts another `YearDate` object as a parameter and returns the numbers of
-  days between one date and another.
+  accepts another `YearDate` object as a parameter and returns the absolute value
+  of numbers of days between one date and another. This method should never
+  return a negative number.
 
 ## Write Down Test Descriptions With Your Neighbor
 Before you write any code for the `YearDate` class you should write tests first.
