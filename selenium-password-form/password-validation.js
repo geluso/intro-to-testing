@@ -38,7 +38,12 @@ function verifyPasswordRestrictions(ev) {
   var test2 = testMeetsComplexityRequirements(password1);
   var test3 = testPasswordsMatch(password1, password2);
 
-  passwordSubmit.disabled = !test1 || !test2 || !test3;
+  var isDisabled = !test1 || !test2 || !test3; 
+  if (isDisabled) {
+    passwordSubmit.addAttribute('disabled');
+  } else {
+    passwordSubmit.removeAttribute('disabled');
+  }
 }
 
 function testMeetsLengthRequirement(password) {
