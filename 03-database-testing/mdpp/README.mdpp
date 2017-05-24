@@ -1,0 +1,74 @@
+# Database Testing
+
+## Objectives
+* Write tests that interact with databases.
+* Use test driven development to model database interactions.
+* Create a test database that resets when tests run.
+
+Simply querying a database for the right information can be tricky. Adding
+new information to a database can be even trickier. Adding information in
+a database while maintaining foreign key relationships can be the trickiest
+thing of all!
+
+**Test Driven Development**, and **Unit Tests** can help us decide how we want
+to interact with our database and make sure that we're interacting with it
+properly.
+
+Database tests can be written without any front-end code, and without any
+back-end code. It's good to eliminate everything besides the database
+code itself. If a test fails then we'll know there's something wrong with
+just our database code and we won't waste time debugging front-end or back-end
+code.
+
+# Database Scripting
+Let's practice writing scripts that interact with the database without front-end
+or back-end code.
+
+Define a model for a simple database that tracks students names and their
+grades.
+
+* Name the database `school`
+* Create a model called `grade`
+* add a column named `name` of type string
+* add a column named `grade` of type integer
+
+### Create Project Structure
+```
+mkdir school-db
+cd school-db
+npm install --save pg sequelize
+createdb school
+sequelize init
+```
+
+### Configure Database
+Configure the database to point to the `school` database in development and a
+database called `school_test` in the test section. Remove the `"production"`
+section in the configuration. Your computer is probably configured to have no
+username or password for your local database, so remove the username and password
+fields too.
+
+**config/config.json**:
+```
+{
+  "development": {
+    "database": "school",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "database": "school_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
+```
+
+### Create Database Model
+Now create a Sequelize model where we can keep each grade. Be sure to run the
+database migration after the model is created.
+
+```
+sequelize model:create --name grade --attributes name:text,grade:integer
+sequelize db:migrate
+```
