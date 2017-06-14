@@ -1,0 +1,12 @@
+{
+  "development": {
+    "database": "music",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "database": "music_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

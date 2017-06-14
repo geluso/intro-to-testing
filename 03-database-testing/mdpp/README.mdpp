@@ -38,6 +38,7 @@ mkdir school-db
 cd school-db
 npm install --save pg sequelize
 createdb school
+createdb school_test
 sequelize init
 ```
 
@@ -71,4 +72,102 @@ database migration after the model is created.
 ```
 sequelize model:create --name grade --attributes name:text,grade:integer
 sequelize db:migrate
+```
+
+Change your NODE_ENV to `test` and migrate the database again.
+
+```
+export NODE_ENV=test
+sequelize db:migrate
+```
+
+# Create A Music Database with Foreign Key Relationships
+Dealing with foreign keys in a database can be tricky. It's easy to forget
+exactly how to interact with the database, especially when using a tool like
+Sequelize that adds a whole new set of commands to remember.
+
+Let's write a simple script outside of a website and server that tests just
+creating foreign key relationships so we can make sure we're doing that right.
+
+Make a database with three tables:
+
+* **Artist** artist_id, name
+* **Album** album_id, artist_id, title
+* **Song** song_id, album_id, title
+
+```
+mkdir music
+cd music
+npm install --save pg sequelize
+createdb music
+createdb music_test
+sequelize init
+```
+
+Edit the `config/config.json` file so it points to the `music` and `music_test`
+databases.
+
+```
+{
+  "development": {
+    "database": "music",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "database": "music_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
+```
+
+### Create Models
+Create models for **Artist**, **Album** and **Song**, manually configure their
+`hasMany` and `belongsTo` associations. Finally, run the migration.
+
+```
+sequelize model:create --name artist --attributes name:string
+sequelize model:create --name album --attributes title:string,artistId:integer
+sequelize model:create --name song --attributes title:string,albumId:integer
+sequelize db:migrate
+```
+
+**models/artist.js**
+```js
+associate: function(models) {
+  // associations can be defined here
+  models.artist.hasMany(models.album);
+}
+```
+
+**models/album.js**
+```js
+associate: function(models) {
+  // associations can be defined here
+  models.album.belongsTo(models.artist);
+  models.album.hasMany(models.song);
+}
+```
+
+**models/song.js**
+```js
+associate: function(models) {
+  // associations can be defined here
+  models.song.belongsTo(models.album);
+}
+```
+
+### Create Simple Script
+Create a new directory called `scripts` and make a file there called
+`create-song.js`.
+
+```
+mkdir scripts
+touch scripts/create-song.js
+```
+
+**scripts/create-song.js**
+```js
+!INCLUDE "../scripts/create-song.js"
 ```
