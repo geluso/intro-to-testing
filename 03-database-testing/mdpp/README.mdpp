@@ -36,7 +36,7 @@ grades.
 ```
 mkdir school-db
 cd school-db
-npm install --save pg sequelize
+npm install --save pg sequelize@3.30.4
 createdb school
 createdb school_test
 sequelize init
@@ -98,7 +98,7 @@ Make a database with three tables:
 ```
 mkdir music
 cd music
-npm install --save pg sequelize
+npm install --save pg sequelize@3.30.4
 createdb music
 createdb music_test
 sequelize init

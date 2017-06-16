@@ -1,6 +1,6 @@
 mkdir school-db
 cd school-db
-npm install --save pg sequelize
+npm install --save pg sequelize@3.30.4
 createdb school
 sequelize init
 
