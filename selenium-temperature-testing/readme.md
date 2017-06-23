@@ -1,31 +1,33 @@
-# Selenium Browser Testing
-Here's an example repo where we can see how to use Selenium to test websites.
-The website is a simple temperature converter. Users can enter a temperature,
-select whether their converting to Fahrenheit or to Celsius and see the converted
-temperature. The website has a slider users can grab to scale the temperature up
-or down to see how it varies. The temperature uses color to indicate whether a
-temperature is cold, medium or hot.
+# Selenium Temperature Conversion Lab
+Here's a lab with a website all set up all about temperature conversion. Let's
+use Selenium and Mocha to make sure this site operates correctly.
 
-```
-npm install selenium-webdriver
-```
+## Setup
+* Clone this repo
+* `cd` into the repo directory
+* Run `npm install` to install project dependencies
+* Run `node index.js` to run the server
+* Navigate to http://localhost:3000 to see the site we're working with
+* Execute your tests with `mocha`
 
-```
-var webdriver = require('selenium-webdriver'),
-    By = webdriver.By,
-    until = webdriver.until;
+# Your Task
+Complete the provided test file so Mocha and Selenium verify the website
+behaves properly.
 
-var driver = new webdriver.Builder()
-    .forBrowser('firefox')
-    .build();
+* Describe Temperature Conversion Site
+  * it should convert from Fahrenheit to Celsius properly
+  * it should convert from Celsius to Fahrenheit to properly
+  * it should reset text to "" and "Output" after pressing the clear button
 
-driver.get('http://www.google.com/ncr');
-driver.findElement(By.name('q')).sendKeys('webdriver');
-driver.findElement(By.name('btnG')).click();
-driver.wait(until.titleIs('webdriver - Google Search'), 1000);
-driver.quit();
-```
+One clarification! When you press the "clear" button the text in the input looks
+like it changes to say "Input." This is actually the value of the `placeholder`
+attribute on the `<input>` element. If you try to use Selenium to look for
+"Input" when nothing is in the box it will show up as an empty string, `""`.
+Selenium and web browsers consider the `placeholder` value to be a different
+thing than the text display in the input.
 
-## Licensing
-1. All content is licensed under a CC-BY-NC-SA 4.0 license.
-2. All software code is licensed under GNU GPLv3. For commercial use or alternative licensing, please contact legal@ga.co.
+Your test should use `.getText()` on the search box and make sure the value is
+an empty string.
+
+# Solution
+[Solution](test/temperature-conversion-test-solution.js)

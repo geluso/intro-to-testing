@@ -17,20 +17,5 @@
     "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-react": "^5.0.1",
     "mocha": "^3.3.0"
-  },
-  "description": "Here's a lab with a website all set up all about temperature conversion. Let's use Selenium and Mocha to make sure this site operates correctly.",
-  "version": "1.0.0",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
-  "dependencies": {
-    "express": "^4.15.3",
-    "path": "^0.12.7",
-    "selenium-webdriver": "^3.4.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://git.generalassemb.ly/CODA-curriculum/selenium-temperature-conversion-lab.git"
   }
 }
